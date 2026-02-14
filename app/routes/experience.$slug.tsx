@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/experience.$slug";
 import { getExperience } from "../experience/posts";
+import { renderMarkdown } from "../utils/markdown";
 
 export function loader({ params }: Route.LoaderArgs) {
 	const slug = params.slug;
@@ -18,6 +19,7 @@ export function loader({ params }: Route.LoaderArgs) {
 
 export default function ExperiencePost({ loaderData }: Route.ComponentProps) {
 	const { record } = loaderData;
+	const html = renderMarkdown(record.content);
 
 	return (
 		<main className="terminal-screen">
@@ -43,7 +45,10 @@ export default function ExperiencePost({ loaderData }: Route.ComponentProps) {
 							<p className="terminal-article-meta">
 								{record.role} · {record.period}
 							</p>
-							{renderMarkdown(record.content)}
+							<div
+								className="terminal-article-content"
+								dangerouslySetInnerHTML={{ __html: html }}
+							/>
 						</article>
 					</div>
 					<div className="terminal-block">
@@ -63,32 +68,4 @@ export default function ExperiencePost({ loaderData }: Route.ComponentProps) {
 			</section>
 		</main>
 	);
-}
-
-function renderMarkdown(markdown: string) {
-	const blocks = markdown
-		.split(/\n{2,}/)
-		.map((block) => block.trim())
-		.filter(Boolean);
-
-	return blocks.map((block, index) => {
-		const lines = block.split("\n");
-		const isBullet = lines.every((line) => /^[-*]\s+/.test(line.trim()));
-
-		if (isBullet) {
-			return (
-				<ul key={`block-${index}`} className="terminal-article-list">
-					{lines.map((line, itemIndex) => (
-						<li key={`bullet-${index}-${itemIndex}`}>
-							{line.replace(/^[-*]\s+/, "")}
-						</li>
-					))}
-				</ul>
-			);
-		}
-
-		return (
-			<p key={`block-${index}`}>{block.replace(/\n/g, " ")}</p>
-		);
-	});
 }

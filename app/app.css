@@ -294,20 +294,60 @@ body {
 	color: #def0e3;
 }
 
-.terminal-article-list {
-	margin: 0 0 1rem 1.25rem;
+.terminal-article-content > * + * {
+	margin-top: 1rem;
+}
+
+.terminal-article-content h2,
+.terminal-article-content h3,
+.terminal-article-content h4 {
+	margin: 1.5rem 0 0.5rem;
+	color: #f1ffee;
+	font-weight: 600;
+}
+
+.terminal-article-content ul,
+.terminal-article-content ol {
+	margin: 0 0 1rem 1.5rem;
 	padding: 0;
 	color: #d9efe0;
 	line-height: 1.6;
 }
 
-.terminal-article-list li {
-	margin-bottom: 0.4rem;
+.terminal-article-content li {
+	margin-bottom: 0.35rem;
 }
 
-.terminal-article em {
-	color: #f7c6ff;
+.terminal-article-content code {
+	font-family: "IBM Plex Mono", monospace;
+	background-color: rgba(255, 255, 255, 0.08);
+	padding: 0.1rem 0.35rem;
+	border-radius: 6px;
+}
+
+.terminal-article-content pre {
+	background-color: rgba(0, 0, 0, 0.35);
+	padding: 1rem;
+	overflow-x: auto;
+	border-radius: 10px;
+	border: 1px solid #0c2b3f;
+}
+
+.terminal-article-content blockquote {
+	margin: 0;
+	padding-left: 1rem;
+	border-left: 3px solid #5bdad4;
+	color: #c9f1e0;
 	font-style: italic;
+}
+
+.terminal-article-content em {
+	color: #f7c6ff;
+}
+
+.terminal-article-content a {
+	color: #aaf7ff;
+	text-decoration: underline;
 }
 
 .terminal-link {
