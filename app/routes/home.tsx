@@ -5,11 +5,15 @@ import { getExperience, type Experience } from "../experience/posts";
 import { getFocusAreas, getPrinciples } from "../content/lists";
 
 const contactLinks = [
-	{ label: "Email", href: "mailto:hello@paulnunnerley.com" },
-	{
-		label: "LinkedIn",
-		href: "https://www.linkedin.com/in/paulnunnerley",
-	},
+       { label: "Email (Gmail)", href: "mailto:paul.g.nunnerley@gmail.com" },
+       {
+	       label: "LinkedIn",
+	       href: "https://www.linkedin.com/in/paul-nunnerley-30b343133/",
+       },
+       {
+	       label: "GitHub",
+	       href: "https://github.com/nunne-rs",
+       },
 ];
 
 type BlogPreview = Omit<BlogPost, "content">;
