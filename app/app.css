@@ -123,6 +123,22 @@ body {
 	color: #e6f4ea;
 }
 
+.terminal-whoami {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.terminal-avatar {
+	width: 96px;
+	height: 96px;
+	border-radius: 18px;
+	object-fit: cover;
+	border: 1px solid #0d2c3f;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
 .terminal-list {
 	list-style: none;
 	padding: 0;

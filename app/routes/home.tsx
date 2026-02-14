@@ -32,10 +32,20 @@ function buildCommands({ posts, experiences, focus, principles }: CommandContext
 		{
 			command: "whoami",
 			output: (
-				<>
-					<p>Paul Nunnerley — Engineering leader based in the United Kingdom.</p>
-					<p>Currently partnering with software teams at Auto Trader UK.</p>
-				</>
+				<div className="terminal-whoami">
+					<img
+						src="/images/paul.jpg"
+						alt="Paul Nunnerley smiling while hiking through greenery"
+						className="terminal-avatar"
+						loading="lazy"
+						width={96}
+						height={96}
+					/>
+					<div>
+						<p>Paul Nunnerley — Engineering leader based in the United Kingdom.</p>
+						<p>Currently partnering with software teams at Auto Trader UK.</p>
+					</div>
+				</div>
 			),
 		},
 		{
