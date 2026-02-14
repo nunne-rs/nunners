@@ -5,6 +5,7 @@ period: 2018 — Present
 summary: Leading the development of customer experience and data driven products at the UK’s largest automotive marketplace.
 ---
 
-- Co-lead the platform and core marketplace tribes serving millions of monthly visitors.
-- Modernised delivery infrastructure with progressive delivery, observability, and paved roads.
-- Built a coaching guild for engineering managers, increasing engagement and retention.
+- Leader of CX Department and Programme
+- Owner of Marketing Technology systems and website personalisation
+- Leader of Data Products and Analytics Engineering Function
+- Created of Customer products like Performance Dashboard and Vehicle Check
