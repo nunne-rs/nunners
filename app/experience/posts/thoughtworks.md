@@ -1,7 +1,7 @@
 ---
 role: Consultant Developer
 company: Thoughtworks
-period: The past
+period: 2014 - 2015
 summary: Tech lead for sales systems and internal tools
 ---
 

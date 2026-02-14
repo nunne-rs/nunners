@@ -1,7 +1,7 @@
 ---
 role: Engineering Lead
 company: Auto Trader UK
-period: 2021 — Present
+period: 2018 — Present
 summary: Leading the development of customer experience and data driven products at the UK’s largest automotive marketplace.
 ---
 

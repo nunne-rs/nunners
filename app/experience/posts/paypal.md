@@ -1,7 +1,7 @@
 ---
 role: Software Engineer - Payment Methods
 company: PayPal @ San Francisco
-period: The past
+period: 2015 - 2018
 summary: Supporting payment methods and marketplace integrations
 ---
 
