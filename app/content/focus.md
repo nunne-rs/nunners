@@ -1,6 +1,6 @@
 ---
-title: Focus Areas
+title: My current focus
 ---
-- Clarify strategy so teams always know the customer outcome they serve.
-- Grow managers through coaching, feedback, and psychological safety.
-- Ship reliably with strong engineering practices and useful metrics.
+
+- Building a platform and team for CX success.
+- Embedding analytics at the core of decision making.
