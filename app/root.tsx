@@ -20,7 +20,11 @@ export const links: Route.LinksFunction = () => [
 	{
 		rel: "stylesheet",
 		href:
-			"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap",
+			"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+	},
+	{
+		rel: "stylesheet",
+		href: "https://unpkg.com/terminal.css@0.7.3/dist/terminal.min.css",
 	},
 ];
 
