@@ -1,10 +1,10 @@
 ---
 role: Consultant Developer
 company: Thoughtworks
-period: 2012 — 2016
-summary: Helped clients adopt modern engineering practices and cloud-native architectures.
+period: The past
+summary: Tech lead for sales systems and internal tools
 ---
 
-- Embedded with retail and public sector teams to introduce continuous delivery pipelines.
-- Ran technical strategy workshops aligning exec teams on measurable outcomes.
-- Mentored graduates through their first production launches across three continents.
+- Implemented a SPA for field sales to better manage pipeline
+- Moved team from EU to China 
+- Trained and prepared graduate consultants for billable projects
