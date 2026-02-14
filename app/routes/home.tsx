@@ -1,4 +1,6 @@
+import { Link } from "react-router";
 import type { Route } from "./+types/home";
+import { getPosts, type BlogPost } from "../blog/posts";
 
 const focusAreas = [
 	"Clarify strategy so teams always know the customer outcome they serve.",
@@ -21,65 +23,97 @@ const contactLinks = [
 	},
 ];
 
-const commands = [
-	{
-		command: "whoami",
-		output: (
-			<>
-				<p>Paul Nunnerley — Engineering leader based in the United Kingdom.</p>
-				<p>Currently partnering with software teams at Auto Trader UK.</p>
-			</>
-		),
-	},
-	{
-		command: "uptime",
-		output: (
-			<p>15+ years supporting product engineers, platforms, and marketplace growth.</p>
-		),
-	},
-	{
-		command: "cat focus.txt",
-		output: (
-			<ul className="terminal-list">
-				{focusAreas.map((item) => (
-					<li key={item}>{item}</li>
-				))}
-			</ul>
-		),
-	},
-	{
-		command: "cat principles.txt",
-		output: (
-			<ul className="terminal-list">
-				{principles.map((item) => (
-					<li key={item}>{item}</li>
-				))}
-			</ul>
-		),
-	},
-	{
-		command: "open links",
-		output: (
-			<ul className="terminal-links">
-				{contactLinks.map((link) => {
-					const external = link.href.startsWith("http");
-					return (
-						<li key={link.label}>
-							<a
-								href={link.href}
-								target={external ? "_blank" : undefined}
-								rel={external ? "noreferrer" : undefined}
-							>
-								{link.label}
-								<span aria-hidden="true"> ↗</span>
-							</a>
+type BlogPreview = Omit<BlogPost, "content">;
+const dateFormatter = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium" });
+
+function formatDate(isoDate: string) {
+	return dateFormatter.format(new Date(isoDate));
+}
+
+function buildCommands(posts: BlogPreview[]) {
+	return [
+		{
+			command: "whoami",
+			output: (
+				<>
+					<p>Paul Nunnerley — Engineering leader based in the United Kingdom.</p>
+					<p>Currently partnering with software teams at Auto Trader UK.</p>
+				</>
+			),
+		},
+		{
+			command: "uptime",
+			output: (
+				<p>15+ years supporting product engineers, platforms, and marketplace growth.</p>
+			),
+		},
+		{
+			command: "cat focus.txt",
+			output: (
+				<ul className="terminal-list">
+					{focusAreas.map((item) => (
+						<li key={item}>{item}</li>
+					))}
+				</ul>
+			),
+		},
+		{
+			command: "cat principles.txt",
+			output: (
+				<ul className="terminal-list">
+					{principles.map((item) => (
+						<li key={item}>{item}</li>
+					))}
+				</ul>
+			),
+		},
+		{
+			command: "open links",
+			output: (
+				<ul className="terminal-links">
+					{contactLinks.map((link) => {
+						const external = link.href.startsWith("http");
+						return (
+							<li key={link.label}>
+								<a
+									href={link.href}
+									target={external ? "_blank" : undefined}
+									rel={external ? "noreferrer" : undefined}
+								>
+									{link.label}
+									<span aria-hidden="true"> ↗</span>
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			),
+		},
+		{
+			command: "ls blog",
+			output: posts.length ? (
+				<ul className="terminal-posts">
+					{posts.map((post) => (
+						<li key={post.slug} className="terminal-post">
+							<div className="terminal-post-header">
+								<Link
+									to={`/blog/${post.slug}`}
+									className="terminal-post-title terminal-post-link"
+								>
+									{post.title}
+								</Link>
+								<span className="terminal-post-meta">{formatDate(post.date)}</span>
+							</div>
+							<p>{post.summary}</p>
 						</li>
-					);
-				})}
-			</ul>
-		),
-	},
-];
+					))}
+				</ul>
+			) : (
+				<p>No blog posts yet. Drop a markdown file into app/blog/posts/.</p>
+			),
+		},
+	];
+}
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -92,7 +126,14 @@ export function meta({}: Route.MetaArgs) {
 	];
 }
 
-export default function Home() {
+export function loader({}: Route.LoaderArgs) {
+	const posts = getPosts().map(({ content, ...meta }) => meta);
+	return { posts };
+}
+
+export default function Home({ loaderData }: Route.ComponentProps) {
+	const commands = buildCommands(loaderData.posts);
+
 	return (
 		<main className="terminal-screen">
 			<section className="terminal-window" aria-label="Terminal user interface">
