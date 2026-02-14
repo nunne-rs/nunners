@@ -204,6 +204,55 @@ body {
 	color: #cfe6d6;
 }
 
+.terminal-experience {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 1rem;
+}
+
+.terminal-experience-item {
+	padding: 1rem 1.2rem;
+	border: 1px solid #103247;
+	border-radius: 14px;
+	background-color: rgba(4, 12, 18, 0.9);
+	display: grid;
+	gap: 0.35rem;
+}
+
+.terminal-experience-header {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem 0.9rem;
+	align-items: baseline;
+}
+
+.terminal-experience-link {
+	font-weight: 600;
+	color: #f5fff8;
+	text-decoration: none;
+	border-bottom: 1px dashed rgba(245, 255, 248, 0.45);
+	padding-bottom: 0.05rem;
+	transition: border-color 120ms ease, color 120ms ease;
+}
+
+.terminal-experience-link:hover {
+	color: #aaf7ff;
+	border-color: #aaf7ff;
+}
+
+.terminal-experience-role {
+	color: #8ed8ff;
+	font-size: 0.95rem;
+}
+
+.terminal-experience-period {
+	margin: 0;
+	color: #7bd3b5;
+	font-size: 0.9rem;
+}
+
 .terminal-article {
 	border: 1px solid #0f364c;
 	border-radius: 14px;

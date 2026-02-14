@@ -1,19 +1,8 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/home";
 import { getPosts, type BlogPost } from "../blog/posts";
-
-const focusAreas = [
-	"Clarify strategy so teams always know the customer outcome they serve.",
-	"Grow managers through coaching, feedback, and psychological safety.",
-	"Ship reliably with strong engineering practices and useful metrics.",
-];
-
-const principles = [
-	"Default to transparency—context beats control.",
-	"Design teams around customer missions, not tech stacks.",
-	"Metrics should prompt conversations, never punishment.",
-	"Calm beats clever; predictable delivery unlocks innovation.",
-];
+import { getExperience, type Experience } from "../experience/posts";
+import { getFocusAreas, getPrinciples } from "../content/lists";
 
 const contactLinks = [
 	{ label: "Email", href: "mailto:hello@paulnunnerley.com" },
@@ -24,13 +13,21 @@ const contactLinks = [
 ];
 
 type BlogPreview = Omit<BlogPost, "content">;
+type ExperiencePreview = Omit<Experience, "content">;
 const dateFormatter = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium" });
 
 function formatDate(isoDate: string) {
 	return dateFormatter.format(new Date(isoDate));
 }
 
-function buildCommands(posts: BlogPreview[]) {
+type CommandContext = {
+	posts: BlogPreview[];
+	experiences: ExperiencePreview[];
+	focus: string[];
+	principles: string[];
+};
+
+function buildCommands({ posts, experiences, focus, principles }: CommandContext) {
 	return [
 		{
 			command: "whoami",
@@ -51,7 +48,7 @@ function buildCommands(posts: BlogPreview[]) {
 			command: "cat focus.txt",
 			output: (
 				<ul className="terminal-list">
-					{focusAreas.map((item) => (
+					{focus.map((item) => (
 						<li key={item}>{item}</li>
 					))}
 				</ul>
@@ -112,6 +109,30 @@ function buildCommands(posts: BlogPreview[]) {
 				<p>No blog posts yet. Drop a markdown file into app/blog/posts/.</p>
 			),
 		},
+		{
+			command: "ls experience",
+			output: experiences.length ? (
+				<ul className="terminal-experience">
+					{experiences.map((role) => (
+						<li key={role.slug} className="terminal-experience-item">
+							<div className="terminal-experience-header">
+								<Link
+									to={`/experience/${role.slug}`}
+									className="terminal-experience-link"
+								>
+									{role.company}
+								</Link>
+								<span className="terminal-experience-role">{role.role}</span>
+							</div>
+							<p className="terminal-experience-period">{role.period}</p>
+							<p>{role.summary}</p>
+						</li>
+					))}
+				</ul>
+			) : (
+				<p>No experience records yet. Drop markdown files into app/experience/posts/.</p>
+			),
+		},
 	];
 }
 
@@ -128,11 +149,19 @@ export function meta({}: Route.MetaArgs) {
 
 export function loader({}: Route.LoaderArgs) {
 	const posts = getPosts().map(({ content, ...meta }) => meta);
-	return { posts };
+	const experiences = getExperience().map(({ content, ...meta }) => meta);
+	const focus = getFocusAreas();
+	const principles = getPrinciples();
+	return { posts, experiences, focus, principles };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-	const commands = buildCommands(loaderData.posts);
+	const commands = buildCommands({
+		posts: loaderData.posts,
+		experiences: loaderData.experiences,
+		focus: loaderData.focus,
+		principles: loaderData.principles,
+	});
 
 	return (
 		<main className="terminal-screen">
