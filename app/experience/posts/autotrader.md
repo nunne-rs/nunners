@@ -1,5 +1,5 @@
 ---
-role: Director of Engineering
+role: Engineering Lead
 company: Auto Trader UK
 period: 2021 — Present
 summary: Leading platform and marketplace engineering teams to scale trusted automotive commerce.
